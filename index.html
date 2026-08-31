@@ -87,7 +87,7 @@
   .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
   .hero::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(6,8,10,.05) 0%, rgba(6,8,10,.12) 45%, rgba(4,6,8,.82) 100%);
+    background:linear-gradient(180deg, rgba(6,8,10,0) 0%, rgba(6,8,10,.08) 38%, rgba(6,8,10,.62) 68%, rgba(4,6,8,.93) 100%);
   }
   .hero-content{position:relative;z-index:2;width:100%;max-width:var(--content);margin:0 auto;padding:0 var(--gutter) 76px;color:#fff;}
   .hero .eyebrow{color:#cfe0ff;opacity:.9;}
@@ -100,8 +100,8 @@
   .stat-line{display:flex;flex-wrap:wrap;gap:10px 28px;margin:8px 0 40px;font-size:1.02rem;color:var(--ink-soft);}
   .stat-line b{color:var(--ink);font-weight:700;}
   .tl{border-top:1px solid var(--line);}
-  .tl-row{display:grid;grid-template-columns:104px 1fr;gap:28px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;}
-  .tl-year{font-size:1.55rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  .tl-row{display:grid;grid-template-columns:132px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .tl-year{font-size:1.55rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap;}
   .tl-text{font-size:1.08rem;color:var(--ink);}
   .tl-text .st{margin-left:8px;font-size:.8rem;}
   .tl-text .n{color:var(--ink-faint);font-size:.88rem;margin-left:8px;}
@@ -176,14 +176,15 @@
   .next-list li b{color:var(--ink);font-weight:700;}
 
   /* ---------- metrics snapshot ---------- */
-  .metrics{background:var(--bg-soft);padding:100px 0 64px;}
+  .metrics{background:var(--bg-soft);padding:100px 0 56px;}
   .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:44px 24px;text-align:center;margin-bottom:28px;}
   @media(min-width:700px){.metrics-grid{grid-template-columns:repeat(5,1fr);}}
   .metric .num{font-size:clamp(1.7rem,2.6vw,2.3rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1;white-space:nowrap;}
   .metric .lab{font-size:.88rem;color:var(--ink-soft);margin-top:10px;}
   .metrics-note{text-align:center;font-size:.85rem;color:var(--ink-faint);max-width:760px;margin:0 auto;}
 
-  footer.note{max-width:640px;margin:0 auto;padding:56px 32px 96px;color:var(--ink-faint);font-size:.92rem;line-height:1.6;text-align:center;background:var(--bg-soft);}
+  footer.note{background:var(--bg-soft);padding:0 32px 88px;}
+  footer.note p{max-width:640px;margin:32px auto 0;padding-top:32px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:.92rem;line-height:1.6;text-align:center;}
 
   @media(max-width:600px){
     :root{--gutter:20px;}
@@ -230,7 +231,7 @@
     <div class="tl">
       <div class="tl-row">
         <div class="tl-year">2001</div>
-        <div class="tl-text">Debutto Subaru World Rally Team: Rally di Nuova Zelanda, #6, Petter Solberg/Phil Mills — 7° assoluto <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="n">4 fonti</span> <a class="foto-link" href="#foto-nz2001">Vedi foto →</a><br>Stessa stagione, Telstra Rally Australia, #24, Al-Wahaibi/Sircombe, 13° <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span> <a class="foto-link" href="#foto-australia2001">Vedi foto →</a></div>
+        <div class="tl-text">Debutto Subaru World Rally Team: Rally di Nuova Zelanda, #6, Petter Solberg/Phil Mills — 7° assoluto <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="n">4 fonti · foto non pubblica</span><br>Stessa stagione, Telstra Rally Australia, #24, Al-Wahaibi/Sircombe, 13° <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span> <a class="foto-link" href="#foto-australia2001">Vedi foto →</a></div>
       </div>
       <div class="tl-row">
         <div class="tl-year">2003</div>
@@ -287,13 +288,9 @@
         <img src="img/ewrc-aus2001-photo.jpg" alt="Fotografia d'epoca dello Subaru Impreza WRC al Telstra Rally Australia 2001">
         <figcaption>Telstra Rally Australia · 2001<span class="src">Trovata durante la ricerca · © eWRC.cz · <a href="#E21">E21</a></span></figcaption>
       </figure>
-      <figure id="foto-nz2001">
+      <figure id="foto-australia-press">
         <img src="img/smh-clipping.jpg" alt="Ritaglio del Sydney Morning Herald del 2 novembre 2001">
         <figcaption>Sydney Morning Herald · 2 nov 2001<span class="src">Trovata durante la ricerca · <a href="#E22">E22</a></span></figcaption>
-      </figure>
-      <figure>
-        <img src="img/web-poland-01.jpg" alt="Fotografia di stile commerciale di uno Subaru Impreza WRC in configurazione rally">
-        <figcaption>Periodo polacco · 2003<span class="src">Trovata durante la ricerca · legame con questo telaio non verificato</span></figcaption>
       </figure>
     </div>
   </div>
@@ -321,7 +318,7 @@
         <h3>eWRC-results.com · "Cars history"</h3>
         <span class="when">Database, consultato 2026</span>
         <p>Fonte indipendente dal rivenditore: 38 partecipazioni 2001–2017 per la targa X16 SRT; cita autonomamente "Chassis #22".</p>
-        <a class="doc-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Vedi la fonte ↗</a>
+        <a class="doc-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Vedi la fonte ↗ (richiede login)</a>
       </div>
       <div class="doc-item">
         <h3>Libretto di gara MSA n. 34638 e V5C 2019</h3>
@@ -400,7 +397,7 @@
 
     <div class="ev-group">
       <div class="ev-group-title">Database specialistico eWRC-results.com</div>
-      <div class="ev-row" id="E23"><span class="code">E23</span><span class="fact">"Cars history", targa X16 SRT → "Chassis #22", 38 gare 2001–2017 — fonte non dichiarata</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Fonte ↗</a></div>
+      <div class="ev-row" id="E23"><span class="code">E23</span><span class="fact">"Cars history", targa X16 SRT → "Chassis #22", 38 gare 2001–2017 — fonte non dichiarata</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Fonte ↗ (richiede login)</a></div>
       <div class="ev-row" id="E24"><span class="code">E24</span><span class="fact">Tappe Rally Nuova Zelanda 2001, Solberg/Mills #6</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/event/103-propecia-rally-new-zealand-2001/results/1900" target="_blank" rel="noopener">Fonte ↗</a></div>
       <div class="ev-row" id="E25"><span class="code">E25</span><span class="fact">Classifica finale ufficiale, Rally Nuova Zelanda 2001</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/event/103-propecia-rally-new-zealand-2001/final-results" target="_blank" rel="noopener">Fonte ↗</a></div>
       <div class="ev-row" id="E26"><span class="code">E26</span><span class="fact">Profilo pilota Jean-Marie Cuoq, stagione Francia Terra 2004</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/profile/813-jean-marie-cuoq" target="_blank" rel="noopener">Fonte ↗</a></div>
@@ -485,7 +482,7 @@
   <div class="wrap">
     <div class="metrics-grid">
       <div class="metric"><div class="num">28</div><div class="lab">Evidenze</div></div>
-      <div class="metric"><div class="num">19</div><div class="lab">Findings</div></div>
+      <div class="metric"><div class="num">19</div><div class="lab">Riscontri</div></div>
       <div class="metric"><div class="num">6</div><div class="lab">Tipologie di fonte</div></div>
       <div class="metric"><div class="num">~384M</div><div class="lab">Token elaborati</div></div>
       <div class="metric"><div class="num">$125–190</div><div class="lab">Costo stimato</div></div>
