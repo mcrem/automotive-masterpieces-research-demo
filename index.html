@@ -7,440 +7,494 @@
 <meta name="description" content="Subaru Impreza WRC 2001, telaio PROGD01022, targa X16 SRT. Storia, evidenze e ricerca indipendente.">
 <style>
   :root{
-    --bg:#faf9f6;
-    --ink:#1c1b19;
-    --ink-soft:#5c5a54;
-    --ink-faint:#9a978d;
-    --line:#e9e6dd;
-    --accent:#8a3a1e;
-    --accent-soft:#b5602e;
-    --verified:#3d6b48;
-    --supported:#9c6a1e;
-    --open:#6b6862;
-    --conflict:#a1462f;
-    --new:#3d5a73;
-    --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,'Times New Roman',serif;
-    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    --measure:660px;
+    --bg:#ffffff;
+    --bg-soft:#f5f5f7;
+    --ink:#1d1d1f;
+    --ink-soft:#6e6e73;
+    --ink-faint:#767676;
+    --line:#d9d9de;
+    --accent:#0a5fd6;
+    --verified:#1a7f37;
+    --supported:#9a6a0c;
+    --conflict:#c0392b;
+    --new:#2f6fed;
+    --neutral:#6e6e73;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --content:1120px;
+    --gutter:32px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  #storia,#fotografie,#documenti,#ricerca,.ev-row{scroll-margin-top:88px;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6;}
+  #storia,#fotografie,#documenti,#ricerca,.ev-row{scroll-margin-top:92px;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.55;}
   img{max-width:100%;display:block;}
   a{color:var(--accent);}
-  .section{max-width:var(--measure);margin:0 auto;padding:96px 28px;}
-  .section.wide{max-width:940px;}
-  .section.full{max-width:1180px;}
-  .kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:600;color:var(--accent);margin:0 0 18px;}
-  h1,h2{font-family:var(--serif);font-weight:400;color:var(--ink);margin:0 0 .5em;}
-  h2{font-size:clamp(1.7rem,3.4vw,2.2rem);line-height:1.22;letter-spacing:-.01em;}
-  h3{font-size:1.1rem;font-weight:600;font-family:var(--sans);margin:0 0 .3em;color:var(--ink);}
+  .wrap{max-width:var(--content);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+  section.block{padding:88px 0;}
+  section.block.tight{padding-top:0;}
+  section.block.rule{border-top:1px solid var(--line);}
+  .eyebrow{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--accent);margin:0 0 16px;}
+  h1,h2,h3{font-family:var(--sans);color:var(--ink);margin:0 0 .5em;}
+  h2{font-size:clamp(2.1rem,4vw,2.9rem);font-weight:700;line-height:1.12;letter-spacing:-.02em;}
+  h3{font-size:1.15rem;font-weight:700;margin:0 0 .4em;}
   p{margin:0 0 1em;}
-  p.lede{font-size:1.14rem;color:var(--ink-soft);}
+  p.lede{font-size:1.25rem;color:var(--ink-soft);max-width:660px;}
   .soft{color:var(--ink-soft);}
   .faint{color:var(--ink-faint);}
 
-  .st{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+  /* status labels with accessible tooltip */
+  .st{position:relative;display:inline-flex;align-items:center;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;border-bottom:1px dotted currentColor;cursor:help;}
+  .st:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  .st::after{
+    content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 11px);transform:translate(-50%,4px);
+    background:#1d1d1f;color:#fff;font-size:.85rem;font-weight:500;text-transform:none;letter-spacing:normal;white-space:normal;line-height:1.45;
+    width:250px;padding:12px 14px;border-radius:10px;box-shadow:0 16px 32px rgba(0,0,0,.22);
+    opacity:0;pointer-events:none;transition:opacity .16s ease, transform .16s ease;z-index:40;
+  }
+  .st::before{
+    content:"";position:absolute;left:50%;bottom:calc(100% + 5px);transform:translate(-50%,4px);
+    border:6px solid transparent;border-top-color:#1d1d1f;opacity:0;transition:opacity .16s ease, transform .16s ease;z-index:40;
+  }
+  .st:hover::after,.st:focus-visible::after{opacity:1;transform:translate(-50%,0);}
+  .st:hover::before,.st:focus-visible::before{opacity:1;transform:translate(-50%,0);}
   .st-verificato{color:var(--verified);}
   .st-supportato{color:var(--supported);}
   .st-conflitto{color:var(--conflict);}
-  .st-aperta{color:var(--open);}
   .st-nuovo{color:var(--new);}
 
-  /* ---------- STICKY HEADER (appears after hero) ---------- */
+  .tag-source{display:inline-block;font-size:.82rem;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:5px 12px;white-space:nowrap;}
+
+  /* ---------- STICKY HEADER ---------- */
   .topnav{
     position:fixed;top:0;left:0;right:0;z-index:50;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 32px;
-    background:rgba(250,249,246,.78);
-    backdrop-filter:blur(14px) saturate(160%);
-    -webkit-backdrop-filter:blur(14px) saturate(160%);
-    border-bottom:1px solid rgba(0,0,0,.06);
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    border-bottom:1px solid rgba(0,0,0,.07);
     transform:translateY(-100%);
     transition:transform .3s ease;
-    font-size:.82rem;
   }
   .topnav.visible{transform:translateY(0);}
-  .topnav .tn-name{font-weight:600;letter-spacing:.02em;color:var(--ink);}
-  .topnav .tn-links{display:flex;gap:28px;}
-  .topnav .tn-links a{color:var(--ink-soft);text-decoration:none;}
-  .topnav .tn-links a:hover{color:var(--accent);}
+  .topnav-inner{max-width:var(--content);margin:0 auto;padding:16px var(--gutter);display:flex;align-items:center;justify-content:space-between;font-size:.95rem;}
+  .topnav .tn-name{font-weight:700;letter-spacing:-.01em;color:var(--ink);}
+  .topnav .tn-links{display:flex;gap:32px;}
+  .topnav .tn-links a{color:var(--ink-soft);text-decoration:none;font-weight:500;}
+  .topnav .tn-links a:hover{color:var(--ink);}
   @media(max-width:760px){.topnav .tn-links{display:none;}}
 
   /* ---------- HERO ---------- */
-  .hero{position:relative;height:94vh;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;}
-  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;}
+  .hero{position:relative;height:94vh;min-height:600px;display:flex;align-items:flex-end;overflow:hidden;background:#0b0d10;}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
   .hero::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(10,10,12,.05) 0%, rgba(10,10,12,.08) 40%, rgba(8,8,10,.72) 100%);
+    background:linear-gradient(180deg, rgba(6,8,10,.05) 0%, rgba(6,8,10,.12) 45%, rgba(4,6,8,.82) 100%);
   }
-  .hero-content{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:0 32px 68px;color:#fff;}
-  .hero .kicker{color:#e8dcd2;opacity:.85;}
-  .hero h1{color:#fff;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.04;margin-bottom:.22em;}
-  .hero .plate{font-size:1.08rem;color:#e9e6df;letter-spacing:.02em;margin-bottom:8px;}
-  .hero .plate b{color:#f3d9c8;font-weight:700;}
-  .hero .spec{font-size:.86rem;color:#c9c4ba;margin-bottom:0;}
+  .hero-content{position:relative;z-index:2;width:100%;max-width:var(--content);margin:0 auto;padding:0 var(--gutter) 76px;color:#fff;}
+  .hero .eyebrow{color:#cfe0ff;opacity:.9;}
+  .hero h1{color:#fff;font-size:clamp(2.6rem,6.4vw,5rem);font-weight:700;line-height:1.03;letter-spacing:-.03em;margin-bottom:.2em;}
+  .hero .plate{font-size:1.3rem;font-weight:500;color:#f2f2f4;margin-bottom:10px;}
+  .hero .plate b{font-weight:700;color:#fff;}
+  .hero .spec{font-size:.95rem;color:#c6cad2;margin-bottom:0;}
 
-  /* ---------- act divider ---------- */
-  .act{max-width:1180px;margin:0 auto;padding:64px 32px 0;display:flex;align-items:baseline;gap:18px;}
-  .act .num{font-family:var(--serif);font-size:1.5rem;color:var(--accent-soft);}
-  .act .title{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.82rem;font-weight:700;color:var(--ink-faint);}
-
-  /* ---------- storia rows ---------- */
-  .tl-row{display:grid;grid-template-columns:88px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line);align-items:baseline;}
-  .tl-row:first-child{border-top:none;padding-top:0;}
-  .tl-year{font-family:var(--serif);font-size:1.3rem;color:var(--accent-soft);}
-  .tl-text{font-size:1.02rem;color:var(--ink);}
-  .tl-text .st{margin-left:6px;}
-  .tl-text .n{color:var(--ink-faint);font-size:.86rem;margin-left:6px;}
-  .foto-link{font-size:.84rem;color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-soft);margin-left:6px;}
+  /* ---------- storia timeline ---------- */
+  .stat-line{display:flex;flex-wrap:wrap;gap:10px 28px;margin:8px 0 40px;font-size:1.02rem;color:var(--ink-soft);}
+  .stat-line b{color:var(--ink);font-weight:700;}
+  .tl{border-top:1px solid var(--line);}
+  .tl-row{display:grid;grid-template-columns:104px 1fr;gap:28px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .tl-year{font-size:1.55rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  .tl-text{font-size:1.08rem;color:var(--ink);}
+  .tl-text .st{margin-left:8px;font-size:.8rem;}
+  .tl-text .n{color:var(--ink-faint);font-size:.88rem;margin-left:8px;}
+  .foto-link{font-size:.88rem;color:var(--accent);text-decoration:none;margin-left:8px;font-weight:500;}
+  .foto-link:hover{text-decoration:underline;}
+  .tl-more{padding:24px 0 0;font-size:.95rem;color:var(--ink-faint);}
+  @media(max-width:600px){.tl-row{grid-template-columns:1fr;gap:6px;}}
 
   /* ---------- fotografie ---------- */
   figure{margin:0;}
-  figure img{border-radius:2px;box-shadow:0 16px 34px -20px rgba(0,0,0,.3);}
-  figcaption{margin-top:12px;font-size:.85rem;color:var(--ink-soft);line-height:1.5;}
-  figcaption .src{display:block;color:var(--ink-faint);font-size:.78rem;margin-top:2px;}
-  .gallery-hero{margin-bottom:56px;}
-  .gallery-grid{display:grid;grid-template-columns:1fr;gap:52px;}
-  @media(min-width:760px){.gallery-grid.two{grid-template-columns:1fr 1fr;}.gallery-grid.three{grid-template-columns:1fr 1fr 1fr;}}
+  figure img{border-radius:10px;}
+  figcaption{margin-top:14px;font-size:.95rem;color:var(--ink);}
+  figcaption .src{display:block;color:var(--ink-faint);font-size:.85rem;margin-top:3px;}
+  .gallery-grid{display:grid;grid-template-columns:1fr;gap:44px;}
+  @media(min-width:760px){.gallery-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1020px){.gallery-grid.three{grid-template-columns:1fr 1fr 1fr;}}
 
   /* ---------- documenti ---------- */
-  .doc-grid{display:grid;grid-template-columns:1fr;gap:44px;}
+  .doc-grid{display:grid;grid-template-columns:1fr;gap:36px;margin-top:8px;}
   @media(min-width:760px){.doc-grid{grid-template-columns:1fr 1fr;}}
-  .doc-item h3{font-size:1.05rem;}
-  .doc-item p{color:var(--ink-soft);font-size:.96rem;margin-bottom:0;}
-  .doc-item .when{color:var(--ink-faint);font-size:.82rem;}
+  .doc-item{border-top:1px solid var(--line);padding-top:20px;}
+  .doc-item h3{font-size:1.1rem;}
+  .doc-item p{color:var(--ink-soft);font-size:1rem;margin-bottom:10px;}
+  .doc-item .when{color:var(--ink-faint);font-size:.88rem;display:block;margin-bottom:6px;}
+  .doc-item .doc-link{font-size:.92rem;font-weight:600;text-decoration:none;}
+  .doc-item .doc-link:hover{text-decoration:underline;}
 
   /* ---------- la ricerca subheads ---------- */
-  .sub-h{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;font-weight:700;color:var(--ink-faint);margin:0 0 22px;}
+  .sub-h{font-size:.85rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--ink-faint);margin:0 0 24px;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;}
+  .chip{background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.94rem;color:var(--ink);}
 
-  /* ---------- evidenze table ---------- */
-  .ev-group{margin-bottom:44px;}
-  .ev-group-title{font-size:.86rem;font-weight:700;color:var(--ink-soft);margin-bottom:14px;}
-  .ev-row{display:grid;grid-template-columns:38px 1fr auto;gap:14px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline;font-size:.92rem;}
+  /* ---------- evidenze ---------- */
+  .ev-group{margin-bottom:40px;}
+  .ev-group-title{font-size:.92rem;font-weight:700;color:var(--ink-soft);margin-bottom:12px;}
+  .ev-row{display:grid;grid-template-columns:42px 1fr auto auto;gap:16px;padding:14px 0;border-top:1px solid var(--line);align-items:center;font-size:1rem;}
   .ev-row:first-child{border-top:none;}
-  .ev-row .code{color:var(--ink-faint);font-size:.78rem;font-variant-numeric:tabular-nums;}
+  .ev-row .code{color:var(--ink-faint);font-size:.85rem;font-variant-numeric:tabular-nums;}
   .ev-row .fact{color:var(--ink);}
-  .ev-row .fact .when{color:var(--ink-faint);font-size:.82rem;}
-  .ev-row .tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);white-space:nowrap;}
-  .ev-row .tag.trovata{color:var(--new);}
+  .ev-row .fact .when{color:var(--ink-faint);font-size:.88rem;}
+  .ev-row .tag{font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-faint);white-space:nowrap;}
+  .ev-row .tag.trovata{color:var(--accent);}
+  .ev-row .src-link{font-size:.88rem;color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;}
+  .ev-row .src-link:hover{text-decoration:underline;}
+  .ev-row .src-none{font-size:.85rem;color:var(--ink-faint);white-space:nowrap;}
+  @media(max-width:700px){.ev-row{grid-template-columns:32px 1fr;grid-template-areas:"code fact" ". tag" ". link";row-gap:6px;} .ev-row .code{grid-area:code;} .ev-row .fact{grid-area:fact;} .ev-row .tag{grid-area:tag;} .ev-row .src-link,.ev-row .src-none{grid-area:link;}}
 
-  /* ---------- cosa emerge (findings) ---------- */
-  .fi-group{margin-bottom:44px;}
-  .fi-group-title{font-size:.86rem;font-weight:700;color:var(--ink-soft);margin-bottom:14px;}
-  .fi-row{padding:18px 0;border-top:1px solid var(--line);}
+  /* ---------- cosa emerge ---------- */
+  .fi-group{margin-bottom:40px;}
+  .fi-group-title{font-size:.92rem;font-weight:700;color:var(--ink-soft);margin-bottom:12px;}
+  .fi-row{padding:20px 0;border-top:1px solid var(--line);}
   .fi-row:first-child{border-top:none;}
-  .fi-row .claim{font-size:1rem;color:var(--ink);margin-bottom:6px;}
-  .fi-row .meta{font-size:.78rem;}
-  .fi-row .meta .refs a{color:var(--ink-faint);text-decoration:none;margin-right:6px;}
+  .fi-row .claim{font-size:1.06rem;color:var(--ink);margin-bottom:8px;}
+  .fi-row .meta{font-size:.85rem;}
+  .fi-row .meta .refs a{color:var(--ink-faint);text-decoration:none;margin-right:8px;font-weight:600;}
   .fi-row .meta .refs a:hover{color:var(--accent);}
-  .fi-row .meta .sep{color:var(--line);margin:0 8px;}
+  .fi-row .meta .sep{color:var(--line);margin:0 10px;}
 
   /* ---------- dove siamo oggi ---------- */
-  .central{padding:8px 0 48px;margin-bottom:48px;border-bottom:1px solid var(--line);}
-  .central h3{font-size:clamp(1.9rem,4.2vw,2.5rem);line-height:1.15;letter-spacing:-.01em;margin-bottom:.4em;}
-  .central .verdict-line{font-size:1.2rem;margin-bottom:16px;}
+  .central{padding:8px 0 44px;margin-bottom:44px;border-bottom:1px solid var(--line);}
+  .central h3{font-size:clamp(1.9rem,4vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:.4em;}
+  .central .verdict-line{font-size:1.25rem;margin-bottom:16px;}
   .central .verdict-line .st{font-size:1em;}
-  .central p{font-size:1.05rem;color:var(--ink-soft);max-width:600px;}
-  .outcomes{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px;}
-  .outcomes p{font-size:.98rem;margin-bottom:0;color:var(--ink);}
+  .central p{font-size:1.08rem;color:var(--ink-soft);max-width:620px;}
+  .outcomes{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px;}
+  .outcomes p{font-size:1.02rem;margin-bottom:0;color:var(--ink);}
 
   /* ---------- prossimi passi ---------- */
   .next-list{margin:0;padding:0;list-style:none;}
-  .next-list li{padding:16px 0;border-top:1px solid var(--line);font-size:.98rem;color:var(--ink-soft);}
+  .next-list li{padding:18px 0;border-top:1px solid var(--line);font-size:1.02rem;color:var(--ink-soft);}
   .next-list li:first-child{border-top:none;}
-  .next-list li b{color:var(--ink);font-weight:600;}
+  .next-list li b{color:var(--ink);font-weight:700;}
 
   /* ---------- metrics snapshot ---------- */
-  .metrics{max-width:var(--measure);margin:0 auto;padding:72px 28px 40px;border-top:1px solid var(--line);}
-  .metrics-grid{display:flex;flex-wrap:wrap;gap:56px;justify-content:center;text-align:center;margin-bottom:8px;}
-  .metric .num{font-family:var(--serif);font-size:2.4rem;color:var(--ink);line-height:1;}
-  .metric .lab{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin-top:8px;}
+  .metrics{background:var(--bg-soft);padding:100px 0 64px;}
+  .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:44px 24px;text-align:center;margin-bottom:28px;}
+  @media(min-width:700px){.metrics-grid{grid-template-columns:repeat(5,1fr);}}
+  .metric .num{font-size:clamp(1.7rem,2.6vw,2.3rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1;white-space:nowrap;}
+  .metric .lab{font-size:.88rem;color:var(--ink-soft);margin-top:10px;}
+  .metrics-note{text-align:center;font-size:.85rem;color:var(--ink-faint);max-width:760px;margin:0 auto;}
 
-  footer.note{max-width:var(--measure);margin:0 auto;padding:0 28px 110px;color:var(--ink-faint);font-size:.78rem;line-height:1.65;text-align:center;}
+  footer.note{max-width:640px;margin:0 auto;padding:56px 32px 96px;color:var(--ink-faint);font-size:.92rem;line-height:1.6;text-align:center;background:var(--bg-soft);}
 
   @media(max-width:600px){
-    .section{padding:64px 20px;}
+    :root{--gutter:20px;}
+    section.block{padding:72px 0;}
     .hero{height:82vh;}
-    .act{padding:48px 20px 0;}
   }
 </style>
 </head>
 <body>
 
 <nav class="topnav" id="topnav">
-  <span class="tn-name">SUBARU IMPREZA WRC 2001</span>
-  <span class="tn-links">
-    <a href="#storia">Storia</a>
-    <a href="#fotografie">Fotografie</a>
-    <a href="#documenti">Documenti</a>
-    <a href="#ricerca">Ricerca</a>
-  </span>
+  <div class="topnav-inner">
+    <span class="tn-name">Subaru Impreza WRC 2001</span>
+    <span class="tn-links">
+      <a href="#storia">Storia</a>
+      <a href="#fotografie">Fotografie</a>
+      <a href="#documenti">Documenti</a>
+      <a href="#ricerca">Ricerca</a>
+    </span>
+  </div>
 </nav>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <img src="img/hero-action.jpg" alt="Subaru Impreza WRC 2001, livrea ufficiale, in azione su sterrato">
   <div class="hero-content">
-    <p class="kicker">Automotive Masterpieces</p>
+    <p class="eyebrow">Automotive Masterpieces</p>
     <h1>Subaru Impreza WRC 2001</h1>
     <p class="plate">Telaio <b>PROGD01022</b> · Targa <b>X16 SRT</b></p>
     <p class="spec">World Rally Car FIA · trazione integrale · turbo 2.0L</p>
   </div>
 </header>
 
-<!-- ============ ACT I ============ -->
-<div class="act"><span class="num">I</span><span class="title">La vettura</span></div>
-
 <!-- ============ STORIA ============ -->
-<section class="section wide" id="storia">
-  <p class="kicker">Storia</p>
-  <h2>Trentacinque partecipazioni, 2001–2017</h2>
+<section class="block" id="storia">
+  <div class="wrap">
+    <p class="eyebrow">Storia</p>
+    <h2>Vent'anni di corse, tre continenti, quattro proprietari</h2>
+    <div class="stat-line">
+      <span><b>38</b> partenze 2001–2017 — eWRC-results.com, fonte indipendente</span>
+      <span><b>35</b> partecipazioni — foglio storico del rivenditore</span>
+    </div>
 
-  <div class="tl-row">
-    <div class="tl-year">2001</div>
-    <div class="tl-text">Debutto Subaru World Rally Team: Rally di Nuova Zelanda, #6, Petter Solberg/Phil Mills — 7° assoluto <span class="st st-verificato">Verificato</span><span class="n">4 fonti</span> <a class="foto-link" href="#foto-nz2001">foto</a>. Stessa stagione, Telstra Rally Australia, #24, Al-Wahaibi/Sircombe, 13° <span class="st st-supportato">Supportato</span> <a class="foto-link" href="#foto-australia2001">foto</a>.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2003</div>
-    <div class="tl-text">Leszek Kuzaj (Polonia): 3 vittorie assolute <span class="st st-supportato">Supportato</span>, 3° nel campionato polacco.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2004</div>
-    <div class="tl-text">Jean-Marie Cuoq (Francia): 2° campionato "Terra", 5 vittorie su 8 gare <span class="st st-supportato">Supportato</span>.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2005–06</div>
-    <div class="tl-text">Benelux, più equipaggi (Munster, Droeven, Groenewoud) <span class="st st-nuovo">Nuovo</span> — periodo assente dalla narrazione del rivenditore, emerso solo dalla ricerca.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2014</div>
-    <div class="tl-text">Immatricolata nel Regno Unito, John "Nev" Jones / Chris Davies (Galles) <span class="st st-verificato">Verificato</span> — campagna rally club 2014–2017 <a class="foto-link" href="#foto-wales">foto</a>.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2016</div>
-    <div class="tl-text">Proprietà a EMMEPI SRL (Italia) <span class="st st-verificato">Verificato</span>.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2018</div>
-    <div class="tl-text">Revisione cambio fatturata a Girardo &amp; Co Private Sales <span class="st st-verificato">Verificato</span> — la vettura passa al rivenditore.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-year">2019</div>
-    <div class="tl-text">Girardo &amp; Co, poi Andrea Saccheggiani, stesso indirizzo <span class="st st-verificato">Verificato</span> — relazione tra i due non determinata.</div>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-year">2001</div>
+        <div class="tl-text">Debutto Subaru World Rally Team: Rally di Nuova Zelanda, #6, Petter Solberg/Phil Mills — 7° assoluto <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="n">4 fonti</span> <a class="foto-link" href="#foto-nz2001">Vedi foto →</a><br>Stessa stagione, Telstra Rally Australia, #24, Al-Wahaibi/Sircombe, 13° <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span> <a class="foto-link" href="#foto-australia2001">Vedi foto →</a></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2003</div>
+        <div class="tl-text">Leszek Kuzaj (Polonia): 3 vittorie assolute, 3° nel campionato polacco <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2004</div>
+        <div class="tl-text">Jean-Marie Cuoq (Francia): 2° campionato "Terra", 5 vittorie su 8 gare <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2005–06</div>
+        <div class="tl-text">Benelux, più equipaggi (Munster, Droeven, Groenewoud) — periodo assente dalla narrazione del rivenditore, emerso solo dalla ricerca <span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2014</div>
+        <div class="tl-text">Immatricolata nel Regno Unito, John "Nev" Jones / Chris Davies (Galles) — campagna rally club 2014–2017 <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span> <a class="foto-link" href="#foto-wales">Vedi foto →</a></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2016</div>
+        <div class="tl-text">Proprietà a EMMEPI SRL (Italia) <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2018</div>
+        <div class="tl-text">Revisione cambio fatturata a Girardo &amp; Co Private Sales — la vettura passa al rivenditore <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2019</div>
+        <div class="tl-text">Girardo &amp; Co, poi Andrea Saccheggiani, stesso indirizzo — relazione tra i due non determinata <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span></div>
+      </div>
+    </div>
+    <p class="tl-more">Le righe sopra riassumono i capitoli principali; il totale di 35–38 include tappe e stagioni non elencate singolarmente.</p>
   </div>
 </section>
 
 <!-- ============ FOTOGRAFIE ============ -->
-<section class="section full" id="fotografie">
-  <p class="kicker">Fotografie</p>
-  <h2 style="margin-bottom:48px">Fotografie</h2>
-
-  <figure class="gallery-hero" id="foto-nz2001">
-    <img src="img/mcklein-contact-sheet.jpg" alt="Provini a contatto McKlein Motorsport Photography, Rally di Nuova Zelanda 2001">
-    <figcaption>Rally di Nuova Zelanda · 2001<span class="src">Fornita dal cliente · McKlein</span></figcaption>
-  </figure>
-
-  <div class="gallery-grid two" id="foto-wales" style="margin-bottom:52px">
-    <figure>
-      <img src="img/web-18.jpg" alt="Fotografia di rally club britannico con targa X16 SRT visibile">
-      <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca</span></figcaption>
-    </figure>
-    <figure>
-      <img src="img/web-19.jpg" alt="Fotografia di rally club britannico, nomi sulle portiere Nev Jones e C. Davies">
-      <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca · Shaun Schofield</span></figcaption>
-    </figure>
-  </div>
-
-  <div class="gallery-grid two" style="margin-bottom:52px">
-    <figure>
-      <img src="img/web-20.jpg" alt="Fotografia di rally club britannico con targa X16 SRT visibile">
-      <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca</span></figcaption>
-    </figure>
-    <figure id="foto-australia2001">
-      <img src="img/ewrc-aus2001-photo.jpg" alt="Fotografia d'epoca dello Subaru Impreza WRC al Telstra Rally Australia 2001">
-      <figcaption>Telstra Rally Australia · 2001<span class="src">Trovata durante la ricerca · © eWRC.cz</span></figcaption>
-    </figure>
-  </div>
-
-  <div class="gallery-grid two">
-    <figure>
-      <img src="img/smh-clipping.jpg" alt="Ritaglio del Sydney Morning Herald del 2 novembre 2001">
-      <figcaption>Sydney Morning Herald · 2 nov 2001<span class="src">Trovata durante la ricerca</span></figcaption>
-    </figure>
-    <figure>
-      <img src="img/web-poland-01.jpg" alt="Fotografia di stile commerciale di uno Subaru Impreza WRC in configurazione rally">
-      <figcaption>Periodo polacco · 2003<span class="src">Trovata durante la ricerca · legame con questo telaio non verificato</span></figcaption>
-    </figure>
+<section class="block rule" id="fotografie">
+  <div class="wrap">
+    <p class="eyebrow">Fotografie</p>
+    <h2>Fotografie</h2>
+    <div class="gallery-grid" style="margin-top:40px">
+      <figure id="foto-wales">
+        <img src="img/web-18.jpg" alt="Fotografia di rally club britannico con targa X16 SRT visibile">
+        <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca · <a href="#E17">E17</a></span></figcaption>
+      </figure>
+      <figure>
+        <img src="img/web-19.jpg" alt="Fotografia di rally club britannico, nomi sulle portiere Nev Jones e C. Davies">
+        <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca · Shaun Schofield · <a href="#E18">E18</a></span></figcaption>
+      </figure>
+      <figure>
+        <img src="img/web-20.jpg" alt="Fotografia di rally club britannico con targa X16 SRT visibile">
+        <figcaption>Rally Club UK · 2014–2017<span class="src">Trovata durante la ricerca · <a href="#E19">E19</a></span></figcaption>
+      </figure>
+      <figure id="foto-australia2001">
+        <img src="img/ewrc-aus2001-photo.jpg" alt="Fotografia d'epoca dello Subaru Impreza WRC al Telstra Rally Australia 2001">
+        <figcaption>Telstra Rally Australia · 2001<span class="src">Trovata durante la ricerca · © eWRC.cz · <a href="#E21">E21</a></span></figcaption>
+      </figure>
+      <figure id="foto-nz2001">
+        <img src="img/smh-clipping.jpg" alt="Ritaglio del Sydney Morning Herald del 2 novembre 2001">
+        <figcaption>Sydney Morning Herald · 2 nov 2001<span class="src">Trovata durante la ricerca · <a href="#E22">E22</a></span></figcaption>
+      </figure>
+      <figure>
+        <img src="img/web-poland-01.jpg" alt="Fotografia di stile commerciale di uno Subaru Impreza WRC in configurazione rally">
+        <figcaption>Periodo polacco · 2003<span class="src">Trovata durante la ricerca · legame con questo telaio non verificato</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 <!-- ============ DOCUMENTI ============ -->
-<section class="section wide" id="documenti">
-  <p class="kicker">Documenti</p>
-  <h2 style="margin-bottom:48px">Documenti</h2>
-  <div class="doc-grid">
-    <div class="doc-item">
-      <h3>Domande DVLA · modulo V62</h3>
-      <p class="when">17 marzo e 17 maggio 2014</p>
-      <p>Targa e numero di telaio riportati insieme — base della catena di identità britannica.</p>
+<section class="block rule" id="documenti">
+  <div class="wrap">
+    <p class="eyebrow">Documenti</p>
+    <h2>Documenti</h2>
+    <div class="doc-grid">
+      <div class="doc-item">
+        <h3>Domande DVLA · modulo V62</h3>
+        <span class="when">17 marzo e 17 maggio 2014</span>
+        <p>Targa e numero di telaio riportati insieme — base della catena di identità britannica.</p>
+        <span class="tag-source">Documento fornito</span>
+      </div>
+      <div class="doc-item">
+        <h3>Dossier di vendita Girardo &amp; Co.</h3>
+        <span class="when">Non datato</span>
+        <p>Attribuisce il telaio al debutto 2001 con Solberg — dichiarazione del venditore, non verificata indipendentemente a livello di telaio.</p>
+        <span class="tag-source">Documento fornito</span>
+      </div>
+      <div class="doc-item">
+        <h3>eWRC-results.com · "Cars history"</h3>
+        <span class="when">Database, consultato 2026</span>
+        <p>Fonte indipendente dal rivenditore: 38 partecipazioni 2001–2017 per la targa X16 SRT; cita autonomamente "Chassis #22".</p>
+        <a class="doc-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Vedi la fonte ↗</a>
+      </div>
+      <div class="doc-item">
+        <h3>Libretto di gara MSA n. 34638 e V5C 2019</h3>
+        <span class="when">2014 · 2019</span>
+        <p>Confermano la continuità di proprietà 2014–2019. Non riprodotti: riportano l'indirizzo di residenza privato degli intestatari.</p>
+        <span class="tag-source">Documento fornito · non riprodotto</span>
+      </div>
     </div>
-    <div class="doc-item">
-      <h3>Dossier di vendita Girardo &amp; Co.</h3>
-      <p class="when">Non datato</p>
-      <p>Attribuisce il telaio al debutto 2001 con Solberg — dichiarazione del venditore, non verificata indipendentemente a livello di telaio.</p>
+  </div>
+</section>
+
+<!-- ============ RICERCA ============ -->
+<section class="block tight rule" id="ricerca">
+  <div class="wrap">
+    <p class="eyebrow">La ricerca</p>
+    <h2>Come nasce questa ricostruzione</h2>
+    <p class="lede">Dal materiale iniziale alle conclusioni verificabili.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <p class="sub-h">Punto di partenza</p>
+    <div class="chips">
+      <span class="chip">Dossier di vendita Girardo &amp; Co.</span>
+      <span class="chip">Fotografie del cliente</span>
+      <span class="chip">Foglio storico gare dattiloscritto</span>
+      <span class="chip">Documenti di immatricolazione UK</span>
     </div>
-    <div class="doc-item">
-      <h3>eWRC-results.com · "Cars history"</h3>
-      <p class="when">Database, consultato 2026</p>
-      <p>Fonte indipendente dal rivenditore: 38 partecipazioni 2001–2017 per la targa X16 SRT; cita autonomamente "Chassis #22".</p>
+    <p class="soft" style="max-width:660px">Il dossier attribuiva il telaio PROGD01022 alla vettura #6 di Solberg/Mills al Rally di Nuova Zelanda 2001. <span class="tag-source">Fornito dal cliente</span> — un'affermazione di partenza, non una verifica indipendente.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <p class="sub-h">Evidenze</p>
+    <p class="soft" style="margin-bottom:32px">28 evidenze dirette, classificate per fonte. Ogni riga collegata è verificabile alla fonte originale.</p>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Documenti ufficiali e cliente</div>
+      <div class="ev-row" id="E01"><span class="code">E01</span><span class="fact">DVLA V62, John Neville Jones <span class="when">17/03/2014</span> — targa e telaio insieme</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E02"><span class="code">E02</span><span class="fact">DVLA V62, Karl Davies, stesso indirizzo <span class="when">17/05/2014</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E03"><span class="code">E03</span><span class="fact">Libretto di gara MSA n. 34638</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E04"><span class="code">E04</span><span class="fact">MOT <span class="when">15/03/2014</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E05"><span class="code">E05</span><span class="fact">MOT <span class="when">25/03/2015</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E06"><span class="code">E06</span><span class="fact">MOT <span class="when">31/03/2016</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E07"><span class="code">E07</span><span class="fact">MOT, BVS Brackley <span class="when">26/09/2018</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E08"><span class="code">E08</span><span class="fact">Fattura BGM Sport, revisione cambio <span class="when">19/12/2018</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E09"><span class="code">E09</span><span class="fact">V5C, intestatario Girardo &amp; Co</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E10"><span class="code">E10</span><span class="fact">V5C, intestatario Andrea Saccheggiani <span class="when">20/05/2019</span></span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
     </div>
-    <div class="doc-item">
-      <h3>Libretto di gara MSA n. 34638 e V5C 2019</h3>
-      <p class="when">2014 · 2019</p>
-      <p>Confermano la continuità di proprietà 2014–2019. Non riprodotti: riportano l'indirizzo di residenza privato degli intestatari.</p>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Dossier del rivenditore</div>
+      <div class="ev-row" id="E11"><span class="code">E11</span><span class="fact">Girardo &amp; Co, copertina — "Chassis no. PRO-GD-01-022"</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E12"><span class="code">E12</span><span class="fact">Girardo &amp; Co, scheda descrittiva — "chassis 022... debutto Rally di Nuova Zelanda"</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E13"><span class="code">E13</span><span class="fact">Girardo &amp; Co, narrazione — recupero a 7° in Nuova Zelanda, 13° in Australia</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E14"><span class="code">E14</span><span class="fact">Girardo &amp; Co, foglio separatore Rally Australia 2001</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E15"><span class="code">E15</span><span class="fact">Foglio storico gare dattiloscritto, autore non dichiarato</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+    </div>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Fotografie</div>
+      <div class="ev-row" id="E16"><span class="code">E16</span><span class="fact">Provini McKlein, Nuova Zelanda 2001, vettura #6</span><span class="tag">fornita</span><span class="src-none">non pubblico</span></div>
+      <div class="ev-row" id="E17"><span class="code">E17</span><span class="fact">Fotografia rally club UK, livrea corrispondente</span><span class="tag trovata">trovata</span><span class="src-none">web aperto</span></div>
+      <div class="ev-row" id="E18"><span class="code">E18</span><span class="fact">Fotografia rally club UK, targa X16 SRT e nomi portiera leggibili</span><span class="tag trovata">trovata</span><span class="src-none">web aperto</span></div>
+      <div class="ev-row" id="E19"><span class="code">E19</span><span class="fact">Fotografia rally club UK, targa e numero coincidenti col foglio storico</span><span class="tag trovata">trovata</span><span class="src-none">web aperto</span></div>
+      <div class="ev-row" id="E20"><span class="code">E20</span><span class="fact">Fotografia periodo polacco — nessuna targa visibile, contestuale</span><span class="tag trovata">trovata</span><span class="src-none">web aperto</span></div>
+      <div class="ev-row" id="E21"><span class="code">E21</span><span class="fact">Fotografia Telstra Rally Australia 2001, vettura #24</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/event/106-telstra-rally-australia-2001/photo?photo=15678&entry=6799" target="_blank" rel="noopener">Fonte ↗</a></div>
+    </div>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Stampa d'epoca</div>
+      <div class="ev-row" id="E22"><span class="code">E22</span><span class="fact">Sydney Morning Herald <span class="when">2 nov 2001</span> — conferma le date del Rally Australia</span><span class="tag trovata">trovata</span><a class="src-link" href="https://www.newspapers.com/image/829131618/?match=1&terms=Telstra%20Rally%20Australia" target="_blank" rel="noopener">Fonte ↗</a></div>
+    </div>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Database specialistico eWRC-results.com</div>
+      <div class="ev-row" id="E23"><span class="code">E23</span><span class="fact">"Cars history", targa X16 SRT → "Chassis #22", 38 gare 2001–2017 — fonte non dichiarata</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/history/cars/wrc/19-subaru-impreza-wrc-01/plate/431" target="_blank" rel="noopener">Fonte ↗</a></div>
+      <div class="ev-row" id="E24"><span class="code">E24</span><span class="fact">Tappe Rally Nuova Zelanda 2001, Solberg/Mills #6</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/event/103-propecia-rally-new-zealand-2001/results/1900" target="_blank" rel="noopener">Fonte ↗</a></div>
+      <div class="ev-row" id="E25"><span class="code">E25</span><span class="fact">Classifica finale ufficiale, Rally Nuova Zelanda 2001</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/event/103-propecia-rally-new-zealand-2001/final-results" target="_blank" rel="noopener">Fonte ↗</a></div>
+      <div class="ev-row" id="E26"><span class="code">E26</span><span class="fact">Profilo pilota Jean-Marie Cuoq, stagione Francia Terra 2004</span><span class="tag trovata">trovata</span><a class="src-link" href="https://ewrc-results.com/profile/813-jean-marie-cuoq" target="_blank" rel="noopener">Fonte ↗</a></div>
+    </div>
+
+    <div class="ev-group">
+      <div class="ev-group-title">Fonti terziarie</div>
+      <div class="ev-row" id="E27"><span class="code">E27</span><span class="fact">Wikipedia, Rally di Nuova Zelanda 2001 — voce terziaria</span><span class="tag trovata">trovata</span><span class="src-none">non collegata</span></div>
+      <div class="ev-row" id="E28"><span class="code">E28</span><span class="fact">Wikipedia, Rally Australia 2001 — voce terziaria</span><span class="tag trovata">trovata</span><span class="src-none">non collegata</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ ACT II ============ -->
-<div class="act" id="ricerca"><span class="num">II</span><span class="title">La ricerca</span></div>
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <p class="sub-h">Cosa emerge</p>
 
-<section class="section" style="padding-bottom:48px">
-  <h2>La ricerca</h2>
-  <p class="lede">Dal materiale iniziale alle conclusioni verificabili.</p>
-</section>
+    <div class="fi-group">
+      <div class="fi-group-title">Identità</div>
+      <div class="fi-row"><p class="claim">Targa X16 SRT e telaio PROGD01022 sono abbinati sullo stesso documento ufficiale in 6 documenti primari indipendenti, 2014–2019.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a><a href="#E02">E02</a><a href="#E03">E03</a><a href="#E04">E04</a><a href="#E05">E05</a><a href="#E06">E06</a></span></p></div>
+      <div class="fi-row"><p class="claim">Data di immatricolazione/costruzione registrata come 04-2001.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E03">E03</a></span></p></div>
+      <div class="fi-row"><p class="claim">Il numero di telaio compare in grafie diverse a seconda del documento (PROGD01022 / PRO-GD-01-022 / PROGDA01022 / "022").</p><p class="meta"><span class="st st-conflitto" tabindex="0" data-tip="Le fonti disponibili non concordano.">In conflitto</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a><a href="#E11">E11</a><a href="#E12">E12</a><a href="#E23">E23</a></span></p></div>
+    </div>
 
-<!-- ============ PUNTO DI PARTENZA ============ -->
-<section class="section wide" style="padding-top:0">
-  <p class="sub-h">Punto di partenza</p>
-  <p>Automotive Masterpieces ha ricevuto un dossier di vendita, fotografie del cliente, un foglio dattiloscritto di storico gare e i documenti di immatricolazione britannici. Il dossier attribuiva il telaio PROGD01022 alla vettura #6 di Solberg/Mills al Rally di Nuova Zelanda 2001. <span class="st st-open" style="text-transform:none;font-weight:600">Fornito dal cliente</span> — un'affermazione di partenza, non una verifica indipendente.</p>
-</section>
+    <div class="fi-group">
+      <div class="fi-group-title">Storia agonistica</div>
+      <div class="fi-row"><p class="claim">Una Subaru Impreza S7 WRC '01, #6, Solberg/Mills, ha corso il Rally di Nuova Zelanda 2001.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E13">E13</a><a href="#E16">E16</a><a href="#E24">E24</a><a href="#E27">E27</a></span></p></div>
+      <div class="fi-row"><p class="claim">Piazzamento finale della #6 al Rally di Nuova Zelanda 2001: 7°.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E13">E13</a><a href="#E24">E24</a><a href="#E25">E25</a></span></p></div>
+      <div class="fi-row"><p class="claim">Il telaio PROGD01022 specifico è la vettura usata al Rally di Nuova Zelanda 2001.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E11">E11</a><a href="#E12">E12</a><a href="#E23">E23</a></span></p></div>
+      <div class="fi-row"><p class="claim">La #24, Al-Wahaibi/Sircombe (Oman Arab World Rally Team), ha corso il Telstra Rally Australia 2001.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E14">E14</a><a href="#E21">E21</a><a href="#E28">E28</a></span></p></div>
+      <div class="fi-row"><p class="claim">Venduta a Leszek Kuzaj (Polonia): 3 vittorie, 3° nel campionato polacco 2003.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
+      <div class="fi-row"><p class="claim">Passata a Jean-Marie Cuoq (Francia): 2° nel campionato Terra 2004, 5 vittorie su 8 gare.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E26">E26</a></span></p></div>
+      <div class="fi-row"><p class="claim">Ha corso in Benelux nel 2005–06 con più equipaggi (Munster, Droeven, Groenewoud, van den Heuvel).</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
+      <div class="fi-row"><p class="claim">Rally club UK 2014–2017 sotto X16 SRT, Neville Jones/Chris Davies.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E17">E17</a><a href="#E18">E18</a><a href="#E19">E19</a></span></p></div>
+      <div class="fi-row"><p class="claim">2017, Rallye Terre des Causses (Francia), "Piano"/Paolo Cottu.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
+    </div>
 
-<!-- ============ EVIDENZE ============ -->
-<section class="section wide">
-  <p class="sub-h">Evidenze</p>
-  <p class="soft" style="margin-bottom:36px">34 elementi raccolti e classificati (28 evidenze dirette; le restanti registrano ricerche senza esito, non usate come prova).</p>
-
-  <div class="ev-group">
-    <div class="ev-group-title">Documenti ufficiali UK</div>
-    <div class="ev-row" id="E01"><span class="code">E01</span><span class="fact">DVLA V62, John Neville Jones <span class="when">17/03/2014</span> — targa e telaio insieme</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E02"><span class="code">E02</span><span class="fact">DVLA V62, Karl Davies, stesso indirizzo <span class="when">17/05/2014</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E03"><span class="code">E03</span><span class="fact">Libretto di gara MSA n. 34638</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E04"><span class="code">E04</span><span class="fact">MOT <span class="when">15/03/2014</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E05"><span class="code">E05</span><span class="fact">MOT <span class="when">25/03/2015</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E06"><span class="code">E06</span><span class="fact">MOT <span class="when">31/03/2016</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E07"><span class="code">E07</span><span class="fact">MOT, BVS Brackley <span class="when">26/09/2018</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E08"><span class="code">E08</span><span class="fact">Fattura BGM Sport, revisione cambio <span class="when">19/12/2018</span></span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E09"><span class="code">E09</span><span class="fact">V5C, intestatario Girardo &amp; Co</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E10"><span class="code">E10</span><span class="fact">V5C, intestatario Andrea Saccheggiani <span class="when">20/05/2019</span></span><span class="tag">fornita</span></div>
-  </div>
-
-  <div class="ev-group">
-    <div class="ev-group-title">Dossier del rivenditore</div>
-    <div class="ev-row" id="E11"><span class="code">E11</span><span class="fact">Girardo &amp; Co, copertina — "Chassis no. PRO-GD-01-022"</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E12"><span class="code">E12</span><span class="fact">Girardo &amp; Co, scheda descrittiva — "chassis 022... debutto Rally di Nuova Zelanda"</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E13"><span class="code">E13</span><span class="fact">Girardo &amp; Co, narrazione — recupero a 7° in Nuova Zelanda, 13° in Australia</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E14"><span class="code">E14</span><span class="fact">Girardo &amp; Co, foglio separatore Rally Australia 2001</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E15"><span class="code">E15</span><span class="fact">Foglio storico gare dattiloscritto, autore non dichiarato</span><span class="tag">fornita</span></div>
-  </div>
-
-  <div class="ev-group">
-    <div class="ev-group-title">Fotografie e stampa</div>
-    <div class="ev-row" id="E16"><span class="code">E16</span><span class="fact">Provini McKlein, Nuova Zelanda 2001, vettura #6</span><span class="tag">fornita</span></div>
-    <div class="ev-row" id="E17"><span class="code">E17</span><span class="fact">Fotografia rally club UK, livrea corrispondente</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E18"><span class="code">E18</span><span class="fact">Fotografia rally club UK, targa X16 SRT e nomi portiera leggibili</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E19"><span class="code">E19</span><span class="fact">Fotografia rally club UK, targa e numero coincidenti col foglio storico</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E20"><span class="code">E20</span><span class="fact">Fotografia periodo polacco — nessuna targa visibile, contestuale</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E21"><span class="code">E21</span><span class="fact">Fotografia Telstra Rally Australia 2001, vettura #24</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E22"><span class="code">E22</span><span class="fact">Sydney Morning Herald <span class="when">2 nov 2001</span> — conferma le date del Rally Australia</span><span class="tag trovata">trovata</span></div>
-  </div>
-
-  <div class="ev-group">
-    <div class="ev-group-title">Database specialistico eWRC-results.com</div>
-    <div class="ev-row" id="E23"><span class="code">E23</span><span class="fact">"Cars history", targa X16 SRT → "Chassis #22", 38 gare 2001–2017 — fonte non dichiarata</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E24"><span class="code">E24</span><span class="fact">Tappe Rally Nuova Zelanda 2001, Solberg/Mills #6</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E25"><span class="code">E25</span><span class="fact">Classifica finale ufficiale, Rally Nuova Zelanda 2001</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E26"><span class="code">E26</span><span class="fact">Profilo pilota Jean-Marie Cuoq, stagione Francia Terra 2004</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E27"><span class="code">E27</span><span class="fact">Wikipedia, Rally di Nuova Zelanda 2001 — voce terziaria</span><span class="tag trovata">trovata</span></div>
-    <div class="ev-row" id="E28"><span class="code">E28</span><span class="fact">Wikipedia, Rally Australia 2001 — voce terziaria</span><span class="tag trovata">trovata</span></div>
+    <div class="fi-group">
+      <div class="fi-group-title">Proprietà e provenienza</div>
+      <div class="fi-row"><p class="claim">John Neville Jones, intestatario registrato dal 13/03/2014 circa.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a></span></p></div>
+      <div class="fi-row"><p class="claim">Un secondo modulo V62 (17/05/2014) cita Karl Davies, stesso indirizzo di Jones.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E02">E02</a></span></p></div>
+      <div class="fi-row"><p class="claim">Proprietà trasferita a EMMEPI SRL (Italia) il 31/08/2016.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E03">E03</a></span></p></div>
+      <div class="fi-row"><p class="claim">BGM Sport ha fatturato la revisione cambio il 19/12/2018, fatturata a Girardo &amp; Co.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E08">E08</a></span></p></div>
+      <div class="fi-row"><p class="claim">Girardo &amp; Co Private Sales ha detenuto il V5C come intestatario prima del 20/05/2019.</p><p class="meta"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E09">E09</a></span></p></div>
+      <div class="fi-row"><p class="claim">Andrea Saccheggiani intestatario dal 20/05/2019, stesso indirizzo di Girardo &amp; Co.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E10">E10</a></span></p></div>
+      <div class="fi-row"><p class="claim">Il MOT 2018 conferma la continuità PROGD01022/X16 SRT.</p><p class="meta"><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E07">E07</a></span></p></div>
+    </div>
   </div>
 </section>
 
-<!-- ============ COSA EMERGE ============ -->
-<section class="section wide">
-  <p class="sub-h">Cosa emerge</p>
-
-  <div class="fi-group">
-    <div class="fi-group-title">Identità</div>
-    <div class="fi-row"><p class="claim">Targa X16 SRT e telaio PROGD01022 sono abbinati sullo stesso documento ufficiale in 6 documenti primari indipendenti, 2014–2019.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a><a href="#E02">E02</a><a href="#E03">E03</a><a href="#E04">E04</a><a href="#E05">E05</a><a href="#E06">E06</a></span></p></div>
-    <div class="fi-row"><p class="claim">Data di immatricolazione/costruzione registrata come 04-2001.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E03">E03</a></span></p></div>
-    <div class="fi-row"><p class="claim">Il numero di telaio compare in grafie diverse a seconda del documento (PROGD01022 / PRO-GD-01-022 / PROGDA01022 / "022").</p><p class="meta"><span class="st st-conflitto">In conflitto</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a><a href="#E11">E11</a><a href="#E12">E12</a><a href="#E23">E23</a></span></p></div>
-  </div>
-
-  <div class="fi-group">
-    <div class="fi-group-title">Storia agonistica</div>
-    <div class="fi-row"><p class="claim">Una Subaru Impreza S7 WRC '01, #6, Solberg/Mills, ha corso il Rally di Nuova Zelanda 2001.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E13">E13</a><a href="#E16">E16</a><a href="#E24">E24</a><a href="#E27">E27</a></span></p></div>
-    <div class="fi-row"><p class="claim">Piazzamento finale della #6 al Rally di Nuova Zelanda 2001: 7°.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E13">E13</a><a href="#E24">E24</a><a href="#E25">E25</a></span></p></div>
-    <div class="fi-row"><p class="claim">Il telaio PROGD01022 specifico è la vettura usata al Rally di Nuova Zelanda 2001.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E11">E11</a><a href="#E12">E12</a><a href="#E23">E23</a></span></p></div>
-    <div class="fi-row"><p class="claim">La #24, Al-Wahaibi/Sircombe (Oman Arab World Rally Team), ha corso il Telstra Rally Australia 2001.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E14">E14</a><a href="#E21">E21</a><a href="#E28">E28</a></span></p></div>
-    <div class="fi-row"><p class="claim">Venduta a Leszek Kuzaj (Polonia): 3 vittorie, 3° nel campionato polacco 2003.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
-    <div class="fi-row"><p class="claim">Passata a Jean-Marie Cuoq (Francia): 2° nel campionato Terra 2004, 5 vittorie su 8 gare.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E26">E26</a></span></p></div>
-    <div class="fi-row"><p class="claim">Ha corso in Benelux nel 2005–06 con più equipaggi (Munster, Droeven, Groenewoud, van den Heuvel).</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
-    <div class="fi-row"><p class="claim">Rally club UK 2014–2017 sotto X16 SRT, Neville Jones/Chris Davies.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a><a href="#E17">E17</a><a href="#E18">E18</a><a href="#E19">E19</a></span></p></div>
-    <div class="fi-row"><p class="claim">2017, Rallye Terre des Causses (Francia), "Piano"/Paolo Cottu.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E15">E15</a></span></p></div>
-  </div>
-
-  <div class="fi-group">
-    <div class="fi-group-title">Proprietà e provenienza</div>
-    <div class="fi-row"><p class="claim">John Neville Jones, intestatario registrato dal 13/03/2014 circa.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E01">E01</a></span></p></div>
-    <div class="fi-row"><p class="claim">Un secondo modulo V62 (17/05/2014) cita Karl Davies, stesso indirizzo di Jones.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E02">E02</a></span></p></div>
-    <div class="fi-row"><p class="claim">Proprietà trasferita a EMMEPI SRL (Italia) il 31/08/2016.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E03">E03</a></span></p></div>
-    <div class="fi-row"><p class="claim">BGM Sport ha fatturato la revisione cambio il 19/12/2018, fatturata a Girardo &amp; Co.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E08">E08</a></span></p></div>
-    <div class="fi-row"><p class="claim">Girardo &amp; Co Private Sales ha detenuto il V5C come intestatario prima del 20/05/2019.</p><p class="meta"><span class="st st-supportato">Supportato</span><span class="refs sep">·</span><span class="refs"><a href="#E09">E09</a></span></p></div>
-    <div class="fi-row"><p class="claim">Andrea Saccheggiani intestatario dal 20/05/2019, stesso indirizzo di Girardo &amp; Co.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E10">E10</a></span></p></div>
-    <div class="fi-row"><p class="claim">Il MOT 2018 conferma la continuità PROGD01022/X16 SRT.</p><p class="meta"><span class="st st-verificato">Verificato</span><span class="refs sep">·</span><span class="refs"><a href="#E07">E07</a></span></p></div>
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <p class="sub-h">Dove siamo oggi</p>
+    <div class="central">
+      <h3>Attribuzione WRC 2001</h3>
+      <p class="verdict-line"><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportata</span>, non ancora <span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">verificata</span>.</p>
+      <p>Nessuna fonte primaria dell'epoca (2001–2013) collega finora direttamente il telaio PROGD01022 alla vettura ufficiale del 2001.</p>
+    </div>
+    <div class="outcomes">
+      <p><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span> — Rally di Nuova Zelanda 2001: 7° posto.</p>
+      <p><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span> — storia agonistica 2001–2017 ricostruita in dettaglio.</p>
+      <p><span class="st st-supportato" tabindex="0" data-tip="Più elementi coerenti sostengono la conclusione, ma manca ancora una verifica primaria o definitiva.">Supportato</span> — periodo Benelux 2005–06 emerso dalla ricerca, assente dalla narrazione Girardo.</p>
+      <p><span class="st st-verificato" tabindex="0" data-tip="Confermato da evidenza sufficientemente diretta e affidabile per questa ricerca.">Verificato</span> — catena di identità e proprietà 2014–2019 solidamente documentata.</p>
+    </div>
   </div>
 </section>
 
-<!-- ============ DOVE SIAMO OGGI ============ -->
-<section class="section wide">
-  <p class="sub-h">Dove siamo oggi</p>
-  <div class="central">
-    <h3>Attribuzione WRC 2001</h3>
-    <p class="verdict-line"><span class="st st-supportato">Supportata</span>, non ancora <span class="st st-verificato">verificata</span>.</p>
-    <p>Nessuna fonte primaria dell'epoca (2001–2013) collega finora direttamente il telaio PROGD01022 alla vettura ufficiale del 2001.</p>
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <p class="sub-h">Prossimi passi</p>
+    <ul class="next-list">
+      <li><b>Archivio Prodrive / Subaru World Rally Team.</b> Un documento di allocazione dell'epoca è l'unico elemento in grado di portare l'attribuzione a "Verificato".</li>
+      <li><b>Archivio riservato McKlein Motorsport Photography.</b> Potrebbe mostrare l'area verifiche tecniche 2001, dove una targhetta telaio sarebbe visibile.</li>
+      <li><b>Archivi federali primari (Francia, Polonia).</b> Confermerebbero due stagioni oggi supportate ma non verificate.</li>
+      <li><b>Stampa specialistica non ancora consultata</b> (Autosport, Motoring News) per il 2001.</li>
+    </ul>
   </div>
-  <div class="outcomes">
-    <p><span class="st st-verificato">Verificato</span> — Rally di Nuova Zelanda 2001: 7° posto.</p>
-    <p><span class="st st-verificato">Verificato</span> — storia agonistica 2001–2017 ricostruita in dettaglio.</p>
-    <p><span class="st st-nuovo">Nuovo</span> — periodo Benelux 2005–06 emerso dalla ricerca, assente dalla narrazione Girardo.</p>
-    <p><span class="st st-verificato">Verificato</span> — catena di identità e proprietà 2014–2019 solidamente documentata.</p>
-  </div>
-</section>
-
-<!-- ============ PROSSIMI PASSI ============ -->
-<section class="section wide">
-  <p class="sub-h">Prossimi passi</p>
-  <ul class="next-list">
-    <li><b>Archivio Prodrive / Subaru World Rally Team.</b> Un documento di allocazione dell'epoca è l'unico elemento in grado di portare l'attribuzione a "Verificato".</li>
-    <li><b>Archivio riservato McKlein Motorsport Photography.</b> Potrebbe mostrare l'area verifiche tecniche 2001, dove una targhetta telaio sarebbe visibile.</li>
-    <li><b>Archivi federali primari (Francia, Polonia).</b> Confermerebbero due stagioni oggi supportate ma non verificate.</li>
-    <li><b>Stampa specialistica non ancora consultata</b> (Autosport, Motoring News) per il 2001.</li>
-  </ul>
 </section>
 
 <!-- ============ METRICS SNAPSHOT ============ -->
 <div class="metrics">
-  <div class="metrics-grid">
-    <div class="metric"><div class="num">28</div><div class="lab">Evidenze</div></div>
-    <div class="metric"><div class="num">19</div><div class="lab">Findings</div></div>
-    <div class="metric"><div class="num">4</div><div class="lab">Tipologie di fonti</div></div>
+  <div class="wrap">
+    <div class="metrics-grid">
+      <div class="metric"><div class="num">28</div><div class="lab">Evidenze</div></div>
+      <div class="metric"><div class="num">19</div><div class="lab">Findings</div></div>
+      <div class="metric"><div class="num">6</div><div class="lab">Tipologie di fonte</div></div>
+      <div class="metric"><div class="num">~384M</div><div class="lab">Token elaborati</div></div>
+      <div class="metric"><div class="num">$125–190</div><div class="lab">Costo stimato</div></div>
+    </div>
+    <p class="metrics-note">Documenti cliente · Dossier rivenditore · Fotografie · Stampa d'epoca · Database specialistico eWRC · Fonti terziarie</p>
   </div>
 </div>
 <footer class="note">
-  <p>Documenti del cliente, database specialistico eWRC, archivio storico di quotidiani, web aperto. Ricerca assistita, in più cicli di verifica successivi.</p>
+  <p>Pilot di ricerca storica automotive: come un Researcher assistito amplia, verifica e rende tracciabile una ricerca Automotive Masterpieces.</p>
 </footer>
 
 <script>
