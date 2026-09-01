@@ -25,7 +25,7 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  #storia,#fotografie,#documenti,#ricerca,.ev-row{scroll-margin-top:92px;}
+  #storia,#fotografie,#documenti,#ricerca,.ev-row{scroll-margin-top:104px;}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.55;}
   img{max-width:100%;display:block;}
   a{color:var(--accent);}
@@ -67,19 +67,19 @@
   /* ---------- STICKY HEADER ---------- */
   .topnav{
     position:fixed;top:0;left:0;right:0;z-index:50;
-    background:rgba(255,255,255,.82);
+    background:rgba(20,21,24,.92);
     backdrop-filter:blur(16px) saturate(160%);
     -webkit-backdrop-filter:blur(16px) saturate(160%);
-    border-bottom:1px solid rgba(0,0,0,.07);
+    border-bottom:1px solid rgba(255,255,255,.08);
     transform:translateY(-100%);
     transition:transform .3s ease;
   }
   .topnav.visible{transform:translateY(0);}
-  .topnav-inner{max-width:var(--content);margin:0 auto;padding:16px var(--gutter);display:flex;align-items:center;justify-content:space-between;font-size:.95rem;}
-  .topnav .tn-name{font-weight:700;letter-spacing:-.01em;color:var(--ink);}
-  .topnav .tn-links{display:flex;gap:32px;}
-  .topnav .tn-links a{color:var(--ink-soft);text-decoration:none;font-weight:500;}
-  .topnav .tn-links a:hover{color:var(--ink);}
+  .topnav-inner{max-width:var(--content);margin:0 auto;padding:24px var(--gutter);display:flex;align-items:center;justify-content:space-between;font-size:1.02rem;}
+  .topnav .tn-name{font-weight:700;letter-spacing:-.01em;color:#fff;}
+  .topnav .tn-links{display:flex;gap:36px;}
+  .topnav .tn-links a{color:rgba(255,255,255,.72);text-decoration:none;font-weight:500;}
+  .topnav .tn-links a:hover{color:#fff;}
   @media(max-width:760px){.topnav .tn-links{display:none;}}
 
   /* ---------- HERO ---------- */
@@ -183,8 +183,8 @@
   .metric .lab{font-size:.88rem;color:var(--ink-soft);margin-top:10px;}
   .metrics-note{text-align:center;font-size:.85rem;color:var(--ink-faint);max-width:760px;margin:0 auto;}
 
-  footer.note{background:var(--bg-soft);padding:0 32px 88px;}
-  footer.note p{max-width:640px;margin:32px auto 0;padding-top:32px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:.92rem;line-height:1.6;text-align:center;}
+  footer.note{background:var(--bg-soft);padding:40px 32px 88px;}
+  footer.note p{max-width:640px;margin:0 auto;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:.92rem;line-height:1.6;text-align:center;}
 
   @media(max-width:600px){
     :root{--gutter:20px;}
@@ -331,7 +331,7 @@
 </section>
 
 <!-- ============ RICERCA ============ -->
-<section class="block tight rule" id="ricerca">
+<section class="block rule" id="ricerca">
   <div class="wrap">
     <p class="eyebrow">La ricerca</p>
     <h2>Come nasce questa ricostruzione</h2>
